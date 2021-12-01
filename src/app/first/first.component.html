@@ -1,0 +1,11 @@
+
+<button mat-button (click)="addColumn()">dodaj kolumny</button>
+<button mat-button (click)="addRow()">dodaj wiersze</button>
+
+<div>
+  <tr *ngFor="let row of rows">
+    <td *ngFor="let column of headers">
+      <app-element></app-element>
+    </td>
+  </tr>
+</div>
