@@ -11,11 +11,11 @@ export class SquareComponent implements OnInit {
     private ctx: CanvasRenderingContext2D
   ) { }
 
-  draw(x: number, y: number, z: number) {
+  draw(x: number, y: number, z: number): void {
     this.ctx.fillRect(z * x, z * y, z, z);
   }
 
-  move(y: number, z: number) {
+  move(y: number, z: number): void {
     const max = this.ctx.canvas.width / z;
     const canvas = this.ctx.canvas;
     let x = 0;

@@ -1,5 +1,10 @@
 <p>second works!</p>
-<canvas #canvas width="600" height="300"></canvas>
-<button (click)="animate()">Play</button>
-<button (click)="drawCorners()">Corners</button>
-<button (click)="drawChessboard()">Corners</button>
+
+<canvas #canvas width="500" height="500"></canvas>
+<div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20" >
+  <button (click)="animate()">Play</button>
+  <button (click)="drawCorners()">Corners</button>
+  <button (click)="drawChessboard()">Grid</button>
+  <button (click)="drawEmptySquare(20,20, 4,50,50)">EmptySquare</button>
+  <button (click)="drawEmptySquares()">EmptySquaresss</button>
+</div>
