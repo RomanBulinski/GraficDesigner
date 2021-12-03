@@ -8,6 +8,9 @@ import {SquareComponent} from '../square/square.component';
 })
 export class SecondComponent implements OnInit {
 
+  width = 500;
+  height = 500;
+
   constructor() {
   }
 
@@ -18,6 +21,8 @@ export class SecondComponent implements OnInit {
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
+    this.canvas.nativeElement.width = 500;
+    this.canvas.nativeElement.height = 500;
   }
 
   animate(): void {
@@ -67,9 +72,9 @@ export class SecondComponent implements OnInit {
       let positionX = startX;
       for (let i = 0; i < 5; i++) {
 
-        this.drawEmptySquare( positionX, positionY, i + 2, width, height );
-        if (Math.random() > 0.5){
-          this.drawEmptySquare( positionX + 5, positionY + 5, i + 2, width - 10, height - 10 );
+        this.drawEmptySquare(positionX, positionY, i + 2, width, height);
+        if (Math.random() > 0.5) {
+          this.drawEmptySquare(positionX + 5, positionY + 5, i + 2, width - 10, height - 10);
         }
         positionX = startX + ((width + gap) * (i + 1));
       }
@@ -84,4 +89,29 @@ export class SecondComponent implements OnInit {
     this.ctx.rect(posistionX, posisotionY, width, height);
     this.ctx.stroke();
   }
+
+
+  drawCircles(): void {
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillRect(0, 0, this.width, this.height);
+
+    this.ctx.fillStyle = 'black';
+    const x = this.width * 0.5;
+    const y = this.height * 0.5;
+    const w = this.width * 0.3;
+    const h = this.height * 0.3;
+
+    this.ctx.save();
+
+    this.ctx.translate(x, y);
+    this.ctx.rotate(0.3);
+
+    this.ctx.beginPath();
+    this.ctx.rect(-w * 0.5,  -h * 0.5, w, h);
+    this.ctx.fill();
+
+    this.ctx.restore();
+
+  }
+
 }
