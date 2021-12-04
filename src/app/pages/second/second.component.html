@@ -1,0 +1,12 @@
+<p>second works!</p>
+
+<!--<canvas #canvas width="500" height="500"></canvas>-->
+<canvas #canvas></canvas>
+<div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20" >
+  <button mat-button (click)="animate()">Play</button>
+  <button mat-button (click)="drawCorners()">Corners</button>
+  <button mat-button (click)="drawChessboard()">Grid</button>
+  <button mat-button (click)="drawEmptySquare(20,20, 4,50,50)">EmptySquare</button>
+  <button mat-button (click)="drawEmptySquares()">EmptySquaresss</button>
+  <button mat-button (click)="drawCircles()">Circles</button>
+</div>

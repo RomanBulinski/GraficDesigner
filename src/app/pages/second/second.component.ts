@@ -1,5 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {SquareComponent} from '../square/square.component';
+import {SquareComponent} from '../../objects/square/square.component';
+import random from 'random';
+import {Utils} from '../../objects/utils';
+
 
 @Component({
   selector: 'app-second',
@@ -8,11 +11,10 @@ import {SquareComponent} from '../square/square.component';
 })
 export class SecondComponent implements OnInit {
 
-  width = 500;
-  height = 500;
+  width = 1080;
+  height = 1080;
 
-  constructor() {
-  }
+  constructor() {}
 
   @ViewChild('canvas', {static: true})
   canvas: ElementRef<HTMLCanvasElement>;
@@ -21,8 +23,8 @@ export class SecondComponent implements OnInit {
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
-    this.canvas.nativeElement.width = 500;
-    this.canvas.nativeElement.height = 500;
+    this.canvas.nativeElement.width = this.width;
+    this.canvas.nativeElement.height = this.height;
   }
 
   animate(): void {
@@ -68,6 +70,7 @@ export class SecondComponent implements OnInit {
     const width = 40;
     const height = 40;
     let positionY = startY;
+
     for (let j = 0; j < 5; j++) {
       let positionX = startX;
       for (let i = 0; i < 5; i++) {
@@ -80,11 +83,13 @@ export class SecondComponent implements OnInit {
       }
       positionY = startY + ((height + gap) * (j + 1));
     }
+
   }
 
-  drawEmptySquare(posistionX: number, posisotionY: number, lineWidth: number, width: number, height: number): void {
+   drawEmptySquare(posistionX: number, posisotionY: number, lineWidth: number, width: number, height: number): void {
     this.ctx.fillStyle = 'blue';
     this.ctx.lineWidth = lineWidth;
+
     this.ctx.beginPath();
     this.ctx.rect(posistionX, posisotionY, width, height);
     this.ctx.stroke();
@@ -96,22 +101,51 @@ export class SecondComponent implements OnInit {
     this.ctx.fillRect(0, 0, this.width, this.height);
 
     this.ctx.fillStyle = 'black';
-    const x = this.width * 0.5;
-    const y = this.height * 0.5;
-    const w = this.width * 0.3;
-    const h = this.height * 0.3;
+    const cxStart = this.width * 0.5;
+    const cyStart = this.height * 0.5;
+    const w = this.width * 0.2;
+    const h = this.height * 0.02;
+    let x;
+    let y;
 
-    this.ctx.save();
+    const num = 40;
+    const radius = this.width * 0.3;
 
-    this.ctx.translate(x, y);
-    this.ctx.rotate(0.3);
+    for (let i = 0; i < num; i++) {
+      const slice = Utils.degToRad(360 / num);
+      const angle = slice * i;
 
-    this.ctx.beginPath();
-    this.ctx.rect(-w * 0.5,  -h * 0.5, w, h);
-    this.ctx.fill();
+      x = cxStart + radius * Math.sin(angle);
+      y = cyStart + radius * Math.cos(angle);
 
-    this.ctx.restore();
+      // save canvas context
+      this.ctx.save();
+      // prepere canvas
+      this.ctx.translate(x, y);
+      this.ctx.rotate(-angle + Utils.degToRad(90));
+      this.ctx.scale(Utils.randomRange(0.2, 0.5), Utils.randomRange(0.1, 2));
+      // draw element
+      this.ctx.beginPath();
+      this.ctx.rect(-w * 0.5, Utils.randomRange(0, -h * 0.5 ), w, h);
+      this.ctx.fill();
+      // reset canvas context
+      this.ctx.restore();
 
+
+      this.ctx.save();
+
+      this.ctx.translate(cxStart, cyStart);
+      this.ctx.rotate(-angle + Utils.degToRad(90));
+
+      this.ctx.lineWidth = Utils.randomRange(5, 20);
+
+      this.ctx.beginPath();
+      this.ctx.arc(0, 0, radius * Utils.randomRange( 0.7, 1.3), slice * Utils.randomRange( 1, -8), slice * Utils.randomRange( 1, 5));
+      this.ctx.stroke();
+
+      this.ctx.restore();
+
+    }
   }
 
 }
