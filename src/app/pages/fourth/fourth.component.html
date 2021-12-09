@@ -1,0 +1,52 @@
+<canvas #canvas></canvas>
+<div fxLayout="column" fxLayoutGap="20">
+
+  <button mat-button (click)="draw()">Draw pattern</button>
+
+</div>
+
+<div>ILOŚC KOLUMN I RZEDOW: {{cols}}</div>
+<mat-slider
+  [(ngModel)]="cols"
+  thumbLabel
+  step="1"
+  min="2"
+  max="100"
+  aria-label="units"></mat-slider>
+
+<div>SCALE: {{scaleFactor}}</div>
+<mat-slider
+  [(ngModel)]="scaleFactor"
+  thumbLabel
+  step="1"
+  min="5"
+  max="100"
+  aria-label="units"></mat-slider>
+
+<div>TIMEOUT: {{timeout}}</div>
+<mat-slider
+  [(ngModel)]="timeout"
+  thumbLabel
+  step="10"
+  min="10"
+  max="1000"
+  aria-label="units"></mat-slider>
+
+<div>ANGLE: {{angleFactor}}</div>
+<mat-slider
+  [(ngModel)]="angleFactor"
+  thumbLabel
+  step="0.001"
+  min="0"
+  max="0.5"
+  aria-label="units"></mat-slider>
+
+<div>NOISE: {{noiseFactor}}</div>
+<mat-slider
+  [(ngModel)]="noiseFactor"
+  thumbLabel
+  step="0.1"
+  min="1"
+  max="2"
+  aria-label="units"></mat-slider>
+
