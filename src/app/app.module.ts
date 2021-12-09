@@ -12,6 +12,12 @@ import {SquareComponent} from './objects/square/square.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { ThirdComponent } from './pages/third/third.component';
+import { FourthComponent } from './pages/fourth/fourth.component';
+import {MatSliderModule} from '@angular/material/slider';
+import {FormsModule} from '@angular/forms';
+import { FifthComponent } from './pages/fifth/fifth.component';
+import {FlexModule} from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -22,14 +28,19 @@ import { ThirdComponent } from './pages/third/third.component';
     NaviationBarComponent,
     ElementComponent,
     SquareComponent,
-    ThirdComponent
+    ThirdComponent,
+    FourthComponent,
+    FifthComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatButtonModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatSliderModule,
+    FormsModule,
+    FlexModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

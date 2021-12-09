@@ -64,6 +64,7 @@ export class ThirdComponent implements OnInit {
           agent.draw(this.ctx);
           agent.bounce(this.WIDTH, this.HEIGHT);
         });
+
         requestAnimationFrame(loop);
       };
       requestAnimationFrame(loop);
@@ -72,6 +73,7 @@ export class ThirdComponent implements OnInit {
   }
 
   private fillCanvas(): void {
+
     this.ctx.fillStyle = 'white';
     this.ctx.fillRect(0, 0, this.WIDTH, this.HEIGHT);
   }
