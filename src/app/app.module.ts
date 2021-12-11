@@ -9,15 +9,14 @@ import {PageNotFoundComponent} from './pages/page-not-found/page-not-found.compo
 import {NaviationBarComponent} from './naviation-bar/naviation-bar.component';
 import {ElementComponent} from './objects/element/element.component';
 import {SquareComponent} from './objects/square/square.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
-import { ThirdComponent } from './pages/third/third.component';
-import { FourthComponent } from './pages/fourth/fourth.component';
+import {ThirdComponent} from './pages/third/third.component';
+import {FourthComponent} from './pages/fourth/fourth.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {FormsModule} from '@angular/forms';
-import { FifthComponent } from './pages/fifth/fifth.component';
-
-
+import {FifthComponent} from './pages/fifth/fifth.component';
+import {SixthComponent} from './pages/sixth/sixth.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,8 @@ import { FifthComponent } from './pages/fifth/fifth.component';
     SquareComponent,
     ThirdComponent,
     FourthComponent,
-    FifthComponent
+    FifthComponent,
+    SixthComponent
   ],
   imports: [
     BrowserModule,
