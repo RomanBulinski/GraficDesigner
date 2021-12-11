@@ -16,7 +16,7 @@ import { FourthComponent } from './pages/fourth/fourth.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {FormsModule} from '@angular/forms';
 import { FifthComponent } from './pages/fifth/fifth.component';
-import {FlexModule} from '@angular/flex-layout';
+
 
 
 @NgModule({
@@ -38,8 +38,7 @@ import {FlexModule} from '@angular/flex-layout';
     BrowserAnimationsModule,
     MatButtonModule,
     MatSliderModule,
-    FormsModule,
-    FlexModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
