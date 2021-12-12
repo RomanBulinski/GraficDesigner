@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-fifth',
@@ -33,6 +33,7 @@ export class SixthComponent implements OnInit {
     this.context.textBaseline = 'middle';
     this.context.textAlign = 'center';
     this.context.fillRect(0, 0, this.WIDTH, this.HEIGHT);
+
     this.draw();
   }
 
@@ -114,6 +115,14 @@ export class SixthComponent implements OnInit {
     const glyphs = '_=/'.split('');
     const item = glyphs[Math.floor(Math.random() * glyphs.length)];
     return item;
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent): void {
+    this.text = event.key;
+    this.context.fillStyle = 'black';
+    this.context.fillRect(0, 0, this.WIDTH, this.HEIGHT);
+    this.draw();
   }
 
 }
