@@ -1,6 +1,5 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import SimplexNoise from 'simplex-noise';
-import {makeNoise2D} from 'open-simplex-noise';
 
 
 @Component({
@@ -33,7 +32,7 @@ export class FourthComponent implements OnInit {
     this.canvas.nativeElement.height = this.HEIGHT;
     this.ctx.fillStyle = 'white';
 
-    this.draw();
+    // this.draw();
   }
 
 
@@ -42,69 +41,55 @@ export class FourthComponent implements OnInit {
     // this.ngZone.runOutsideAngular(() => {
     //   const loop = () => {
 
-    // setInterval(() => {
+    setInterval(() => {
 
-    const simplex2 = new SimplexNoise('Seed' );
-    const noise2D = makeNoise2D( Math.random() );
-    //   const noise2D = makeNoise2D( Date.now)
-    const simplex3 = new SimplexNoise('Seed' );
+      const simplex3 = new SimplexNoise(Math.random);
 
-    const gridw = this.WIDTH * 0.8;
-    const gridh = this.HEIGHT * 0.8;
-    const cellw = gridw / this.cols;
-    const cellh = gridh / this.cols;
-    const marginX = (this.WIDTH - gridw) * 0.5;
-    const marginY = (this.HEIGHT - gridh) * 0.5;
+      const gridw = this.WIDTH * 0.8;
+      const gridh = this.HEIGHT * 0.8;
+      const cellw = gridw / this.cols;
+      const cellh = gridh / this.cols;
+      const marginX = (this.WIDTH - gridw) * 0.5;
+      const marginY = (this.HEIGHT - gridh) * 0.5;
 
+      const numCells = this.cols * this.cols;
 
-    this.ctx.fillRect(0, 0, this.WIDTH, this.HEIGHT);
+      this.ctx.fillRect(0, 0, this.WIDTH, this.HEIGHT);
 
-    const numCells = this.cols * this.cols;
+      for (let i = 0; i < numCells; i++) {
 
-    for (let i = 0; i < numCells; i++) {
-      console.log(i);
-      console.log(simplex3);
+        const col = i % this.cols;
+        const row = Math.floor(i / this.cols);
 
+        const x = col * cellw;
+        const y = row * cellh;
 
-      const col = i % this.cols;
-      const row = Math.floor(i / this.cols);
+        const w = cellw * 0.8;
+        const h = cellh * 0.8;
 
-      const x = col * cellw;
-      const y = row * cellh;
+        const n = simplex3.noise2D(x * 0.001, y * 0.001);
+        const n0 = simplex3.noise2D(0 * 0.001, 0 * 0.001);
 
-      const w = cellw * 0.8;
-      const h = cellh * 0.8;
+        const angle = n * Math.PI * this.angleFactor;
+        const scale = (n + 1) / 2 * this.scaleFactor;
 
-      // const n = Math.random();
-      const n = simplex3.noise2D(x, y ) ;
-      // const n = noise2D(x, y);
-      console.log(n);
+        this.ctx.save();
 
-      // const angle = n * Math.PI * this.angleFactor;
-      const angle = n * Math.PI * 0.2;
-      const scale = (n + 1) / 2 * this.scaleFactor;
-      // const scale = n  * this.scaleFactor;
+        this.ctx.translate(x, y);
+        this.ctx.translate(marginX, marginY);
+        this.ctx.translate(cellw * 0.5, cellh * 0.5);
+        this.ctx.rotate(angle);
 
-      this.ctx.save();
+        this.ctx.lineWidth = scale;
 
-      this.ctx.translate(x, y);
-      this.ctx.translate(marginX, marginY);
-      this.ctx.translate(cellw * 0.5, cellh * 0.5);
-      this.ctx.rotate(angle);
+        this.ctx.beginPath();
+        this.ctx.moveTo(w * -0.5, 0);
+        this.ctx.lineTo(w * 0.5, 0);
+        this.ctx.stroke();
 
-      this.ctx.lineWidth = scale;
-
-      this.ctx.beginPath();
-      this.ctx.moveTo(w * -0.5, 0);
-      this.ctx.lineTo(w * 0.5, 0);
-      this.ctx.stroke();
-
-      this.ctx.restore();
-    }
-
-
-    // }, this.timeout);
-
+        this.ctx.restore();
+      }
+    }, this.timeout);
 
     //     requestAnimationFrame(loop);
     //   };
